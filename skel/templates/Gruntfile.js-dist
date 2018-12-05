@@ -1,0 +1,56 @@
+module.exports = function(grunt) {
+
+    var jsFiles = {
+        'public/js/common-plugins-1.0.2.js': [
+            'public/plugins/js/jquery-1.11.3.js',
+            'public/plugins/js/jquery-ui.js',
+            'public/plugins/js/underscore-1.8.3.js',
+            'public/plugins/js/underscore.string-3.3.4.js',
+            'public/plugins/js/backbone-1.3.3.js',
+            'public/plugins/js/bootstrap.js',
+            'public/plugins/js/bootstrap-datepicker.js',
+            'public/plugins/js/select2.js',
+            'public/plugins/js/moment.js',
+            'public/plugins/js/moment-round.js',
+            'public/plugins/js/jquery.dataTables.min.js',
+            'public/plugins/js/dataTables.bootstrap.min.js',
+            'public/plugins/js/jquery.dataTables.yadcf.js',
+            'public/plugins/js/jquery.gritter.js',
+            'public/plugins/js/sprintf.min.js',
+            'public/plugins/js/slimback-1.0.2.js',
+        ],
+        'public/js/CHANGEME-<%= pkg.version %>.js': ['private/js/CHANGEME/CHANGEME.js'],
+    };
+
+    // Project configuration.
+    grunt.initConfig({
+        pkg: grunt.file.readJSON('package.json'),
+        watch: {
+            files: ["private/**/*.js"],
+            tasks: ["concat"]
+        },
+        uglify: {
+            my_target: {
+                files: jsFiles,
+            }
+        },
+        concat: {
+            options: {
+                stripBanners: true,
+            },
+            dist: {
+                files: jsFiles,
+            }
+        },
+    });
+
+    // Load the plugins.
+    grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-concat');
+
+    // Default task(s).
+    grunt.registerTask('default', ['watch']);
+    grunt.registerTask('prod', ['uglify']);
+
+};

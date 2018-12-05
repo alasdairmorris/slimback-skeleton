@@ -1,0 +1,17 @@
+{
+    "name": "alasdairmorris/slimback-skeleton",
+    "description": "Skeleton for a Slimback Application",
+    "license": "MIT",
+    "keywords": [
+    ],
+    "require": {
+        "php": "^5.6 || ^7.0"
+    },
+    "require-dev": {
+    },
+    "scripts": {
+        "post-create-project-cmd": [
+            "php skel/post_create_project.php"
+        ]
+    }
+}
