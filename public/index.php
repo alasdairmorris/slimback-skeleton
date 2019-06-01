@@ -22,6 +22,9 @@ $app->hook('slim.before', function () use ($app) {
     );
 });
 
+// Add some generic PHP helpers
+require __DIR__ . '/../app/functions.php';
+
 // Set up dependencies
 require __DIR__ . '/../app/dependencies.php';
 

@@ -9,6 +9,9 @@ require __DIR__ . '/../vendor/autoload.php';
 $settings = require __DIR__ . '/../app/settings.php';
 $app = new \Slim\Slim($settings);
 
+// Add some generic PHP helpers
+require __DIR__ . '/../app/functions.php';
+
 // Set up dependencies
 require __DIR__ . '/../app/dependencies.php';
 
