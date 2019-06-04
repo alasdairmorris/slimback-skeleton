@@ -2,6 +2,7 @@
 /data/*
 /app/local_settings.php
 /node_modules/
+/vendor/
 
 ######################
 # OS generated files #
