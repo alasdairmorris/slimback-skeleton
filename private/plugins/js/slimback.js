@@ -1,7 +1,7 @@
 var Slimback = (function ($, Backbone, _) {
     var Slimback = {};
 
-    Slimback.VERSION = '1.0.2';
+    Slimback.VERSION = '1.0.3';
 
     // Underscore.js isDefined mixin
     // Returns true if value is defined.
@@ -36,7 +36,8 @@ var Slimback = (function ($, Backbone, _) {
             // Override with custom code where necessary
         },
         addEvents: function(events) {
-            this.delegateEvents( _.extend({}, _.clone(this.events), events) );
+            this.events =  _.extend({}, _.clone(this.events), events);
+            this.delegateEvents(this.events);
         },
     });
 
@@ -286,7 +287,11 @@ var Slimback = (function ($, Backbone, _) {
                 field.closest('.form-group').addClass('has-error');
 
                 function appendError(msg) {
-                    field.after(this.errorTemplate({msg: msg}));
+                    if(field.siblings().parent().hasClass('input-group')) {
+                        field.parent().after(this.errorTemplate({msg: msg}));
+                    } else {
+                        field.after(this.errorTemplate({msg: msg}));
+                    }
                 }
 
                 if (field.length) {
@@ -300,9 +305,9 @@ var Slimback = (function ($, Backbone, _) {
 
             if(generalErrors.length)
             {
-                this.form.before('<div class="alert alert-danger non-field-errors" role="alert"><ul></ul></div>');
+                this.$('form').before('<div class="alert alert-danger non-field-errors" role="alert"><ul></ul></div>');
                 _.each(generalErrors, function(msg) {
-                    this.form.parent().find('div.alert ul').append("<li>"+msg+"</li>");
+                    this.$('form').parent().find('div.alert ul').append("<li>"+msg+"</li>");
                 }, this);
             }
         },
